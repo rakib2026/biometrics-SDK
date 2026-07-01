@@ -1,75 +1,98 @@
-# Fingerprint recognition algorithms
+# Biometricts-SDK
 
-Active development year: 2012
+> A lightweight Python SDK for Face Recognition, Face Verification, ID Verification, eKYC, and Face Liveness Detection.
 
-## Summary
-Some implementations of fingerprint recognition algorithms developed for Biometric Methods course at University of Wrocław, Poland.
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## Usage
+---
 
-### Prerequisites
-* python 2.7
-* python imaging library (PIL)
+## Overview
 
-### How to use it
-Simply do ```python filename.py --help``` to figure out how to execute ```filename``` algorithm
+**Biometricts-SDK** is a lightweight Python SDK that simplifies the integration of AI-powered biometric authentication and identity verification into your applications.
 
-## Algorithms
+It can be used as a reference implementation for developers building solutions with **Face Recognition**, **Face Verification**, **ID Verification**, **eKYC**, **Face Liveness Detection**, and other biometric authentication workflows.
 
-### Poincaré Index
-Finds singular points on fingerprint. 
+The SDK is built to provide a clean, simple, and developer-friendly integration experience using **FaceOnLive** technologies.
 
-How it works (more detailed description [here](http://books.google.pl/books?id=1Wpx25D8qOwC&lpg=PA120&ots=9wRY0Rosb7&dq=poincare%20index%20fingerprint&hl=pl&pg=PA120#v=onepage&q=poincare%20index%20fingerprint&f=false)):
-* divide image into blocks of ```block_size```
-* for each block: 
-    * calculate orientation of the fingerprint ridge in that block (i.e. what is the rigde slope / angle between a ridge and horizon)
-    * sum up the differences of angles (orientations) of the surrounding blocks
-    * there are 4 cases:
-        * sum is 180 (+- tolerance) - loop found
-        * sum is -180 (+- tolerance) - delta found
-        * sum is 360 (+- tolerance) - whorl found
+---
 
-The python script will mark the singularities with circles:
-* red for loop
-* green for delta
-* blue for whorl
-      
-Example: ```python poincare.py images/ppf1.png 16 1 --smooth```
+## Features
 
-Images:
-* Original 
+- Face Recognition
+- Face Detection
+- Face Verification
+- Face Matching
+- ID Verification
+- Identity Verification
+- eKYC Verification
+- Passive Face Liveness Detection
+- Active Face Liveness Detection
+- Biometric Authentication
+- Simple Python API
+- Fast & Lightweight
 
-![fingerprint](https://raw.github.com/rtshadow/biometrics/master/images/ppf1.png)
+---
 
-* With singular points marked by algorithm: 
+## Use Cases
 
-![poincare](https://raw.github.com/rtshadow/biometrics/master/images/ppf1_poincare.gif)
+- Digital KYC (eKYC)
+- Customer Onboarding
+- Identity Verification
+- Face Authentication
+- Biometric Login
+- Attendance Management
+- Visitor Management
+- Access Control
+- FinTech Applications
+- Banking & Financial Services
 
-Note: algorithm marked singular points not only inside fingerprint itself, but on its edges and even outside. This is a result of usage of non-preprocessed image - if the image was enhanced (better contrast, background removed), then only singular points inside fingerprint would be marked.
+---
 
-### Thinning (skeletonization)
+## About
 
-How it [works] (http://bme.med.upatras.gr/improc/Morphological%20operators.htm#Thining)
+This repository demonstrates how to integrate a biometric SDK into Python applications.
 
-Example: ```python thining.py images/ppf1_enhanced.gif --save```
+The project is intentionally kept simple, making it easy to understand the integration flow and customize it for your own biometric verification or identity verification projects.
 
-Images:
-* Before
+Learn more at **[FaceOnLive](https://faceonlive.com/)**.
 
-![before](https://raw.github.com/rtshadow/biometrics/master/images/ppf1_enhanced.gif)
+---
 
-* After:
+## Getting Started
 
-![after](https://raw.github.com/rtshadow/biometrics/master/images/ppf1_enhanced_thinned.gif)
+Clone the repository:
 
-### Minutiae recognition (crossing number method)
-Crossing number methods is a really simple way to detect ridge endings and ridge bifurcations.
+```bash
+git clone https://github.com/rakib2026/biometricts-sdk.git
+```
 
-First, you'll need thinned (skeleton) image (refer to previous section how to get it). Then the crossing number algorithm will look at 3x3 pixel blocks:
-* if middle pixel is black (represents ridge):
-    * if pixel on boundary are crossed with the ridge once, then we've found ridge ending
-    * if pixel on boundary are crossed with the ridge three times, then we've found ridge bifurcation
-    
-Example: ```python crossing_number.py images/ppf1_enhanced_thinned.gif --save```
+Install the required dependencies:
 
-![minutiae](https://raw.github.com/rtshadow/biometrics/master/images/ppf1_enhanced_thinned_minutiae.gif)
+```bash
+pip install -r requirements.txt
+```
+
+Configure your API credentials and start using the SDK in your project.
+
+---
+
+## Contributing
+
+Contributions, feature requests, bug reports, and improvements are always welcome.
+
+Feel free to fork the repository, submit pull requests, or open an issue.
+
+---
+
+## ⭐ Support
+
+If you found **Biometricts-SDK** helpful, please consider giving this repository a **⭐ Star**.
+
+Your support helps more developers discover the project and motivates future improvements.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
